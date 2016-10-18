@@ -1,0 +1,67 @@
+group "ru.kononov"
+version "1.0"
+
+apply plugin: "groovy"
+apply plugin: "java"
+apply plugin: "spring-boot"
+
+ext.groovyVersion = "2.3.11"
+ext.junitVersion = "4.11"
+ext.log4j2Version = "2.6.2"
+ext.hsqldbVersion = "2.3.4"
+ext.hibernameVersion = "5.2.3.Final"
+ext.springVersion = "4.3.2.RELEASE"
+ext.h2Version = "1.4.192"
+ext.derbyVersion = "10.12.1.1"
+
+buildscript {
+    ext.springBootVersion = "1.4.0.RELEASE"
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
+    }
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+sourceSets.main.java.srcDirs = []
+sourceSets.main.groovy.srcDirs = ["src/main/java", "src/main/groovy"]
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web"){
+        exclude module:"groovy"
+        exclude module:"spring-boot-starter-tomcat"
+        exclude module:"javassist"
+        exclude module:"snakeyaml"
+        exclude module:"ognl"
+    }
+
+    compile "org.springframework.boot:spring-boot-starter-jetty"
+
+    compile "org.springframework:spring-jdbc:$springVersion"
+    compile "org.springframework:spring-tx:$springVersion"
+    compile "org.springframework:spring-orm:$springVersion"
+
+    compile "org.apache.logging.log4j:log4j-api:$log4j2Version"
+    compile "org.apache.logging.log4j:log4j-core:$log4j2Version"
+
+    compile "com.fasterxml.jackson.core:jackson-databind"
+    compile "joda-time:joda-time"
+//    compile "org.apache.derby:derby:$derbyVersion"
+//    compile "com.h2database:h2:$h2Version"
+    compile "org.hsqldb:hsqldb:$hsqldbVersion"
+    compile "org.hibernate:hibernate-core:$hibernameVersion"
+
+    compile "org.codehaus.groovy:groovy-all:$groovyVersion"
+    testCompile "junit:junit:$junitVersion"
+}
+
+jar {
+    baseName = "groovy-hibernate-sample"
+    version =  "1.0"
+}
