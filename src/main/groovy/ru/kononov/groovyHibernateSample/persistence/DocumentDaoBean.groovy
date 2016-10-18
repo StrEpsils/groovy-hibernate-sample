@@ -1,4 +1,4 @@
-package ru.kononov.groovyHibernateSample.persistance
+package ru.kononov.groovyHibernateSample.persistence
 
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional

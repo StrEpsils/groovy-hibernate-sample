@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import ru.kononov.groovyHibernateSample.entities.Attribute
 import ru.kononov.groovyHibernateSample.entities.DocumentType
 import ru.kononov.groovyHibernateSample.entities.DocumentTypeAttribute
-import ru.kononov.groovyHibernateSample.persistance.AttributeDao
-import ru.kononov.groovyHibernateSample.persistance.DocumentTypeAttributeDao
-import ru.kononov.groovyHibernateSample.persistance.DocumentTypeDao
+import ru.kononov.groovyHibernateSample.persistence.AttributeDao
+import ru.kononov.groovyHibernateSample.persistence.DocumentTypeAttributeDao
+import ru.kononov.groovyHibernateSample.persistence.DocumentTypeDao
 
 /**
  * Created by admin on 17.10.2016.

@@ -1,4 +1,4 @@
-package ru.kononov.groovyHibernateSample.persistance
+package ru.kononov.groovyHibernateSample.persistence
 
 /**
  * Created by admin on 15.10.2016.

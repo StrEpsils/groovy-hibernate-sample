@@ -1,4 +1,4 @@
-package ru.kononov.groovyHibernateSample.persistance
+package ru.kononov.groovyHibernateSample.persistence
 
 import org.hibernate.Session
 import org.hibernate.SessionFactory

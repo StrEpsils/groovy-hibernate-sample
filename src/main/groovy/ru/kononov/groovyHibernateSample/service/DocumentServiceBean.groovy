@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service
 import ru.kononov.groovyHibernateSample.entities.AttributeValue
 import ru.kononov.groovyHibernateSample.entities.Document
 import ru.kononov.groovyHibernateSample.entities.DocumentType
-import ru.kononov.groovyHibernateSample.persistance.DocumentDao
+import ru.kononov.groovyHibernateSample.persistence.DocumentDao
 
 /**
  * Created by admin on 17.10.2016.
