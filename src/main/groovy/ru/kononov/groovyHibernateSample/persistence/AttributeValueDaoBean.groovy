@@ -11,16 +11,16 @@ class AttributeValueDaoBean extends BaseEntityDaoBean<AttributeValue> implements
 
     List<AttributeValue> findAttributeValuesByAttributeNameAndDocumentId(String attributeName, Long documentId){
         return (List<AttributeValue>)currentSession()
-                .createQuery("from AttributeValue val left join fetch Document doc left join fetch Attribute attr where doc.id = $documentId and attr.name = \'$attributeName\'").list()
+                .createQuery("from AttributeValue val inner join val.document as doc inner join val.attribute as attr where doc.id = $documentId and attr.name = \'$attributeName\'").list()
     }
 
     @Override
     List<AttributeValue> findAttributeValuesByDocumentId(Long documentId) {
-        return (List<AttributeValue>)currentSession().createQuery("from AttributeValue val left join fetch Document doc where doc.id = $documentId").list()
+        return (List<AttributeValue>)currentSession().createQuery("from AttributeValue val inner join val.document doc where doc.id = $documentId").list()
     }
 
     void deleteAttributeValuesByDocument(Long documentId){
-        currentSession().createQuery("delete from AttributeValue val left join fetch Document doc where doc.id = $documentId").executeUpdate()
+        currentSession().createQuery("delete from AttributeValue val left join fetch val.document as doc where doc.id = $documentId").executeUpdate()
     }
 
     @Override

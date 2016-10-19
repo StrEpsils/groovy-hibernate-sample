@@ -20,13 +20,13 @@ class DocumentDaoBean extends BaseEntityDaoBean<Document> implements DocumentDao
     @Override
     @Transactional(readOnly = true)
     List<Document> findDocumentsByDocumentTypeCode(String code) {
-        return (List<Document>)currentSession().createQuery("from Document doc inner join DocumentType doc_type where doc_type.code = \'$code\'").list()
+        return (List<Document>)currentSession().createQuery("from Document doc inner join doc.documentType as doc_type where doc_type.code = \'$code\'").list()
     }
 
     @Override
     @Transactional(readOnly = true)
     List<Document> findDocumentsByDocumentTypeName(String name){
-        return (List<Document>)currentSession().createQuery("from Document doc inner join DocumentType doc_type where doc_type.name = \'$name\'").list()
+        return (List<Document>)currentSession().createQuery("from Document doc inner join doc.documentType as doc_type where doc_type.name = \'$name\'").list()
     }
 
     @Override

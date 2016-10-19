@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
-import ru.kononov.groovyHibernateSample.entities.AttributeValue
 import ru.kononov.groovyHibernateSample.entities.Document
-import ru.kononov.groovyHibernateSample.entities.DocumentType
 
 import ru.kononov.groovyHibernateSample.service.DocumentService
 
@@ -29,7 +27,7 @@ class DocumentHandlerBean implements DocumentHandler{
     private String[] documentIgnorableFieldNames = [ "documentType", "attributeValues"]
     private String[] attributeValueIgnorableFieldNames = [ "document" ]
     private String[] attributeIgnorableFieldNames = [ "documentTypes" ]
-    private String[] documentTypesIgnorableFieldNames = [ "attributes" ]
+    private String[] documentTypesIgnorableFieldNames = [ "attributes", "documents" ]
 
     private FilterProvider documentOnlyFilter = new SimpleFilterProvider()
             .addFilter("Document", (SimpleBeanPropertyFilter)SimpleBeanPropertyFilter.serializeAllExcept(documentIgnorableFieldNames))
@@ -79,7 +77,30 @@ class DocumentHandlerBean implements DocumentHandler{
 
     @Override
     def findDocumentsByDocumentType(String documentTypeCode, String documentTypeName) {
-        return null
+        if (documentTypeCode != null && documentTypeName != null){
+            LOGGER.error("Необходимо ввести только один параметр для поиска: documentId или documentName")
+            return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+
+        if (documentTypeCode != null && !(documentTypeCode instanceof String)){
+            LOGGER.error("Параметр documentTypeCode должен иметь строковый тип")
+            return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+
+        if (documentTypeName != null && !(documentTypeName instanceof String)){
+            LOGGER.error("Параметр documentTypeName должен иметь строковый тип")
+            return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+
+        try {
+            return (documentTypeCode != null) ?
+                    HandlerJsonHelper.responseClosure(documentService.findDocumentsByDocumentTypeCode(documentTypeCode), "Документ не найден", documentWithDetailFilter) :
+                    HandlerJsonHelper.responseClosure(documentService.findDocumentsByDocumentTypeName(documentTypeName), "Документ не найден", documentWithDetailFilter)
+        } catch (Exception e) {
+            e.printStackTrace()
+            LOGGER.error(e)
+            return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR)
+        }
     }
 
     @Override
