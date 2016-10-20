@@ -7,13 +7,13 @@ import ru.kononov.documentBase.entities.Document
  */
 interface DocumentService {
 
-    Long saveDocument(Document document) throws Exception
-    Document updateDocument(Document document) throws Exception
-    void deleteDocument(Document document) throws Exception
-    Document findDocumentByName(String name) throws Exception
-    List<Document> findDocumentsByDocumentTypeCode(String documentTypeCode) throws Exception
-    List<Document> findDocumentsByDocumentTypeName(String documentTypeName) throws Exception
-    List<Document> findAll() throws Exception
-    Document findDocumentById(Long documentId) throws Exception
+    Long saveDocument(Document document) 
+    Document updateDocument(Document document) 
+    void deleteDocument(Document document) 
+    Document findDocumentByName(String name) 
+    List<Document> findDocumentsByDocumentTypeCode(String documentTypeCode) 
+    List<Document> findDocumentsByDocumentTypeName(String documentTypeName) 
+    List<Document> findAll() 
+    Document findDocumentById(Long documentId) 
 
 }

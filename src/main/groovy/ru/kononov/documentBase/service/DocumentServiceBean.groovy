@@ -30,37 +30,37 @@ class DocumentServiceBean implements DocumentService{
 
     @Override
     @Transactional
-    void deleteDocument(Document document) throws Exception{
+    void deleteDocument(Document document) {
         documentDao.delete(document)
     }
 
     @Override
     @Transactional(readOnly = true)
-    Document findDocumentByName(String name) throws Exception{
+    Document findDocumentByName(String name) {
         return documentDao.findDocumentByName(name)
     }
 
     @Override
     @Transactional(readOnly = true)
-    List<Document> findDocumentsByDocumentTypeCode(String documentTypeCode) throws Exception{
+    List<Document> findDocumentsByDocumentTypeCode(String documentTypeCode) {
         return documentDao.findDocumentsByDocumentTypeCode(documentTypeCode)
     }
 
     @Override
     @Transactional(readOnly = true)
-    List<Document> findDocumentsByDocumentTypeName(String documentTypeName) throws Exception{
+    List<Document> findDocumentsByDocumentTypeName(String documentTypeName) {
         return documentDao.findDocumentsByDocumentTypeName(documentTypeName)
     }
 
     @Override
     @Transactional(readOnly = true)
-    List<Document> findAll() throws Exception{
+    List<Document> findAll() {
         return documentDao.findAll()
     }
 
     @Override
     @Transactional(readOnly = true)
-    Document findDocumentById(Long documentId) throws Exception {
+    Document findDocumentById(Long documentId){
         return documentDao.get(documentId)
     }
 }

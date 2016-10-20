@@ -95,7 +95,6 @@ public class WebServer  {
         AbstractRequestLoggingFilter filter = new AbstractRequestLoggingFilter() {
             @Override
             protected void beforeRequest(HttpServletRequest request, String message) {
-
                 LOGGER.debug("before request: {}", message);
             }
             @Override
