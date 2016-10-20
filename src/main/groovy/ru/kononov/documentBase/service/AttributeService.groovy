@@ -8,8 +8,8 @@ import ru.kononov.documentBase.entities.DocumentType
  */
 interface AttributeService {
 
-    def saveAttribute(Attribute attribute)
-    def updateAttribute(Attribute attribute)
+    Long saveAttribute(Attribute attribute)
+    Attribute updateAttribute(Attribute attribute)
     Long attachAttributeToDocumentType(Attribute attribute, DocumentType documentType)
     Long attachAttributeToDocumentType(long attributeId, Long documentTypeId)
     void dettachAttributeFromDocumentType(Attribute attribute, DocumentType documentType)

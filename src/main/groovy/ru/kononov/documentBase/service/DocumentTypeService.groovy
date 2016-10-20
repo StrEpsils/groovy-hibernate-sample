@@ -7,7 +7,7 @@ import ru.kononov.documentBase.entities.DocumentType
  */
 interface DocumentTypeService {
 
-    DocumentType saveDocumentType(DocumentType documentType)
+    Long saveDocumentType(DocumentType documentType)
     DocumentType updateDocumentType(DocumentType documentType)
     void deleteDocumentType(DocumentType documentType)
     DocumentType findDocumentTypesByName(String name)

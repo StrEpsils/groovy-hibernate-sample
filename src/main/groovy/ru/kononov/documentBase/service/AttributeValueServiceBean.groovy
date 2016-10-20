@@ -27,12 +27,12 @@ class AttributeValueServiceBean implements AttributeValueService{
     }
 
     @Override
-    def saveAttributeValue(AttributeValue attributeValue){
+    Long saveAttributeValue(AttributeValue attributeValue){
         return attributeValueDao.save(attributeValue)
     }
 
     @Override
-    def updateAttributeValue(AttributeValue attributeValue){
+    AttributeValue updateAttributeValue(AttributeValue attributeValue){
         return attributeValueDao.update(attributeValue)
     }
 

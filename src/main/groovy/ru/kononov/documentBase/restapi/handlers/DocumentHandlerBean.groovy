@@ -1,7 +1,5 @@
 package ru.kononov.documentBase.restapi.handlers
 
-import com.fasterxml.jackson.core.JsonParseException
-import com.fasterxml.jackson.databind.JsonMappingException
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.ser.FilterProvider
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter
@@ -45,7 +43,7 @@ class DocumentHandlerBean implements DocumentHandler{
     ResponseEntity createDocument(String json) {
         try {
             ObjectMapper mapper = new ObjectMapper()
-            Document document = mapper.setFilterProvider(documentWithDetailFilter).readValue(json, Document.class)
+            Document document = mapper.readValue(json, Document.class)
             documentService.saveDocument(document)
             return new ResponseEntity<RestResponse>(new RestResponse(HttpStatus.CREATED, "Документ добавлен успешно, присвоен id = $document.id "), HttpStatus.CREATED)
         } catch (Exception e) {
@@ -58,7 +56,7 @@ class DocumentHandlerBean implements DocumentHandler{
     ResponseEntity updateDocument(String json) {
         try {
             ObjectMapper mapper = new ObjectMapper()
-            Document document = mapper.setFilterProvider(documentWithDetailFilter).readValue(json, Document.class)
+            Document document = mapper.readValue(json, Document.class)
             documentService.updateDocument(document)
             return new ResponseEntity<RestResponse>(new RestResponse(HttpStatus.OK, "Документ с id = $document.id успешно обновлён"), HttpStatus.OK)
         } catch (Exception e) {

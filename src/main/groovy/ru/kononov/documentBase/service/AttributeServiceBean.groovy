@@ -21,12 +21,12 @@ class AttributeServiceBean implements AttributeService{
     DocumentTypeAttributeDao documentTypeAttributeDao
 
     @Override
-    def saveAttribute(Attribute attribute){
+    Long saveAttribute(Attribute attribute){
         return attributeDao.save(attribute)
     }
 
     @Override
-    def updateAttribute(Attribute attribute){
+    Attribute updateAttribute(Attribute attribute){
         return attributeDao.update(attribute)
     }
 

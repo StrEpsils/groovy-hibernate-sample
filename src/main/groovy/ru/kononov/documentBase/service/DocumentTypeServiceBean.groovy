@@ -15,7 +15,7 @@ class DocumentTypeServiceBean implements DocumentTypeService{
     DocumentTypeDao documentTypeDao
 
     @Override
-    DocumentType saveDocumentType(DocumentType documentType){
+    Long saveDocumentType(DocumentType documentType){
         return documentTypeDao.save(documentType)
     }
 
