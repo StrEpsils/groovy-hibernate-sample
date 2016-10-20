@@ -52,8 +52,6 @@ dependencies {
 
     compile "com.fasterxml.jackson.core:jackson-databind"
     compile "joda-time:joda-time"
-//    compile "org.apache.derby:derby:$derbyVersion"
-//    compile "com.h2database:h2:$h2Version"
     compile "org.hsqldb:hsqldb:$hsqldbVersion"
     compile "org.hibernate:hibernate-core:$hibernameVersion"
 
@@ -62,6 +60,6 @@ dependencies {
 }
 
 jar {
-    baseName = "groovy-hibernate-sample"
-    version =  "1.0"
+    baseName = "document-base"
+    version =  "1.1"
 }
