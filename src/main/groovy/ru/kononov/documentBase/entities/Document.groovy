@@ -25,8 +25,6 @@ class Document implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="DOCUMENT_ID_SEQ")
-//    @SequenceGenerator(name="DOCUMENT_ID_SEQ", sequenceName="DOCUMENT_ID_SEQ", allocationSize=1)
     @Column(name = "DOCUMENT_ID")
     Long id
     @Column(name = "NAME")
