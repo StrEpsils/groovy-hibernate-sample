@@ -9,7 +9,8 @@ interface DocumentService {
 
     Long saveDocument(Document document) 
     Document updateDocument(Document document) 
-    void deleteDocument(Document document) 
+    void deleteDocument(Document document)
+    void deleteDocument(Long documentId)
     Document findDocumentByName(String name) 
     List<Document> findDocumentsByDocumentTypeCode(String documentTypeCode) 
     List<Document> findDocumentsByDocumentTypeName(String documentTypeName) 

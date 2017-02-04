@@ -6,10 +6,13 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider
 import org.apache.logging.log4j.LogManager
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
+import ru.kononov.documentBase.aspect.PrintResult
 import ru.kononov.documentBase.entities.Document
+
 import ru.kononov.documentBase.restapi.util.DocumentBaseException
 import ru.kononov.documentBase.restapi.util.HandlerJsonHelper
 import ru.kononov.documentBase.restapi.util.RestResponse
@@ -40,95 +43,100 @@ class DocumentHandlerBean implements DocumentHandler{
             .addFilter("Attribute", (SimpleBeanPropertyFilter)SimpleBeanPropertyFilter.serializeAllExcept(attributeIgnorableFieldNames));
 
     @Override
+    @PrintResult
     ResponseEntity createDocument(String json) {
         try {
             ObjectMapper mapper = new ObjectMapper()
             Document document = mapper.readValue(json, Document.class)
-            documentService.saveDocument(document)
-            return new ResponseEntity<RestResponse>(new RestResponse(HttpStatus.CREATED, "Документ добавлен успешно, присвоен id = $document.id "), HttpStatus.CREATED)
+            documentService.saveDocument document
+            new ResponseEntity<RestResponse>(new RestResponse(HttpStatus.CREATED, "Документ добавлен успешно, присвоен id = $document.id "), HttpStatus.CREATED)
         } catch (Exception e) {
-            LOGGER.error(e.localizedMessage)
-            return HandlerJsonHelper.badResponse(e)
+            LOGGER.error e.localizedMessage 
+            HandlerJsonHelper.badResponse e
         }
     }
 
     @Override
+    @PrintResult
     ResponseEntity updateDocument(String json) {
         try {
             ObjectMapper mapper = new ObjectMapper()
             Document document = mapper.readValue(json, Document.class)
-            documentService.updateDocument(document)
-            return new ResponseEntity<RestResponse>(new RestResponse(HttpStatus.OK, "Документ с id = $document.id успешно обновлён"), HttpStatus.OK)
+            documentService.updateDocument document
+            new ResponseEntity<RestResponse>(new RestResponse(HttpStatus.OK, "Документ с id = $document.id успешно обновлён"), HttpStatus.OK)
         } catch (Exception e) {
-            LOGGER.error(e.localizedMessage)
-            return HandlerJsonHelper.badResponse(e)
+            LOGGER.error e.localizedMessage
+            HandlerJsonHelper.badResponse e
         }
     }
 
     @Override
+    @PrintResult
     ResponseEntity deleteDocument(String documentId) {
-        if (documentId == null)
+        if (!documentId)
             throw new DocumentBaseException("Параметр documentId является обязательным")
         Long documentIdLong
         try {
-            documentIdLong = Long.parseLong(documentId)
-            Document document
-            document = documentService.findDocumentById(documentIdLong)
-            documentService.deleteDocument(document)
-            return new ResponseEntity<RestResponse>(new RestResponse(HttpStatus.OK, "Документ с id = $documentId удалён успешно"), HttpStatus.OK)
+            documentIdLong = Long.parseLong documentId
+            documentService.deleteDocument documentIdLong
+            new ResponseEntity<RestResponse>(new RestResponse(HttpStatus.OK, "Документ с id = $documentId удалён успешно"), HttpStatus.OK)
         } catch (Exception e) {
-            LOGGER.error(e.localizedMessage)
-            return HandlerJsonHelper.badResponse(e)
+            LOGGER.error e.localizedMessage
+            HandlerJsonHelper.badResponse e
         }
     }
 
     @Override
+    @PrintResult
     ResponseEntity findDocument(String documentName, String documentId) {
-        if (documentId != null && documentName != null)
+        if (documentId && documentName)
             throw new DocumentBaseException("Необходимо ввести только один параметр для поиска: documentName или documentId")
 
-        if (documentId == null && documentName == null)
+        if (!documentId && !documentName)
             throw new DocumentBaseException("Необходимо ввести один из параметров для поиска: documentName или documentId")
 
         try {
             Document document = (documentId != null) ? documentService.findDocumentById(Long.parseLong(documentId)) : documentService.findDocumentByName(documentName)
-            return  HandlerJsonHelper.documentBaseResponse(document, "Документ не найден", documentWithDetailFilter)
+            HandlerJsonHelper.documentBaseResponse(document, "Документ не найден", documentWithDetailFilter)
         } catch (Exception e) {
-            LOGGER.error(e.localizedMessage)
-            return HandlerJsonHelper.badResponse(e)
+            LOGGER.error e.localizedMessage
+            HandlerJsonHelper.badResponse e
         }
     }
 
     @Override
+    @PrintResult
     ResponseEntity findDocumentsByDocumentType(String documentTypeCode, String documentTypeName) {
-        if (documentTypeCode != null && documentTypeName != null)
+        if (!documentTypeCode && !documentTypeName)
+            throw new DocumentBaseException("Необходимо ввести один из параметров для поиска: documentTypeCode или documentTypeName")
+
+        if (documentTypeCode && documentTypeName)
             throw new DocumentBaseException("Необходимо ввести только один параметр для поиска: documentTypeCode или documentTypeName")
 
-        if (documentTypeCode != null && !(documentTypeCode instanceof String))
+        if (documentTypeCode && !(documentTypeCode instanceof String))
             throw new DocumentBaseException("Параметр documentTypeCode должен иметь строковый тип")
 
-        if (documentTypeName != null && !(documentTypeName instanceof String))
+        if (documentTypeName && !(documentTypeName instanceof String))
             throw new DocumentBaseException("Параметр documentTypeName должен иметь строковый тип")
 
         try {
-            List<Document> documents = (documentTypeCode != null) ?
-                    documentService.findDocumentsByDocumentTypeCode(documentTypeCode) :
-                    documentService.findDocumentsByDocumentTypeName(documentTypeName)
-            return HandlerJsonHelper.documentBaseResponse(documents, "Документы не найден", documentWithDetailFilter)
+            List<Document> documents = (documentTypeCode) ? documentService.findDocumentsByDocumentTypeCode(documentTypeCode) : documentService.findDocumentsByDocumentTypeName(documentTypeName)
+            HandlerJsonHelper.documentBaseResponse(documents, "Документы не найден", documentWithDetailFilter)
         } catch (Exception e) {
-            LOGGER.error(e.localizedMessage)
-            return HandlerJsonHelper.badResponse(e)
+            LOGGER.error e.localizedMessage
+            HandlerJsonHelper.badResponse e
         }
     }
 
     @Override
+    @PrintResult
     ResponseEntity findAll() {
         try {
             List<Document> documents = documentService.findAll()
-            return HandlerJsonHelper.documentBaseResponse(documents, "Документы не найдены", documentOnlyFilter)
+            HandlerJsonHelper.documentBaseResponse(documents, "Документы не найдены", documentOnlyFilter)
         } catch (Exception e) {
-            LOGGER.error(e.localizedMessage)
-            return HandlerJsonHelper.badResponse(e)
+            LOGGER.error e.localizedMessage
+            HandlerJsonHelper.badResponse e
         }
     }
 }

@@ -3,6 +3,7 @@ package ru.kononov.documentBase.restapi
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
@@ -15,6 +16,7 @@ import ru.kononov.documentBase.restapi.handlers.DocumentHandler
  */
 @RestController
 @RequestMapping("/document")
+@PreAuthorize("hasAuthority('user_role')")
 class DocumentApi {
 
     @Autowired
@@ -41,7 +43,7 @@ class DocumentApi {
     }
 
     @RequestMapping(value = "/find", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity findDocumentById(
+    ResponseEntity findDocument(
             @RequestParam(value="documentId", required=false) String documentId,
             @RequestParam(value="documentName", required=false) String documentName
     ){

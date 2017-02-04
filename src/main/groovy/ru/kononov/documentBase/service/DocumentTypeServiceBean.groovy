@@ -16,22 +16,22 @@ class DocumentTypeServiceBean implements DocumentTypeService{
 
     @Override
     Long saveDocumentType(DocumentType documentType){
-        return documentTypeDao.save(documentType)
+        documentTypeDao.save documentType
     }
 
     @Override
     DocumentType updateDocumentType(DocumentType documentType){
-        return documentTypeDao.update(documentType)
+        documentTypeDao.update documentType
     }
 
     @Override
     DocumentType findDocumentTypesByName(String name) {
-        return documentTypeDao.findDocumentTypeByName(name)
+        documentTypeDao.findDocumentTypeByName name
     }
 
     @Override
     DocumentType findDocumentTypesByCode(String code) {
-        return documentTypeDao.findDocumentTypeByCode(code)
+        documentTypeDao.findDocumentTypeByCode code
     }
 
     @Override

@@ -13,7 +13,7 @@ interface AttributeValueService {
     List<AttributeValue> findAttributeValuesByAttributeNameAndDocumentId(String attributeName, Long documentId)
     Long saveAttributeValue(AttributeValue attributeValue)
     AttributeValue updateAttributeValue(AttributeValue attributeValue)
-    AttributeValue addAttributeValue(String value, Document document, Attribute attribute)
+    Long addAttributeValue(String value, Document document, Attribute attribute)
     void deleteAttributeValue(AttributeValue attributeValue)
     void deleteAttributeValuesByDocument(Document document)
     void deleteAttributeValuesByDocument(Long documentId)

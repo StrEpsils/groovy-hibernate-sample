@@ -1,5 +1,4 @@
 group "ru.kononov"
-version "1.0"
 
 apply plugin: "groovy"
 apply plugin: "java"
@@ -11,8 +10,7 @@ ext.log4j2Version = "2.6.2"
 ext.hsqldbVersion = "2.3.4"
 ext.hibernameVersion = "5.2.3.Final"
 ext.springVersion = "4.3.2.RELEASE"
-ext.h2Version = "1.4.192"
-ext.derbyVersion = "10.12.1.1"
+ext.springSecurityVersion = "4.2.1.RELEASE"
 
 buildscript {
     ext.springBootVersion = "1.4.0.RELEASE"
@@ -33,22 +31,30 @@ sourceSets.main.java.srcDirs = []
 sourceSets.main.groovy.srcDirs = ["src/main/java", "src/main/groovy"]
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web"){
-        exclude module:"groovy"
-        exclude module:"spring-boot-starter-tomcat"
-        exclude module:"javassist"
-        exclude module:"snakeyaml"
-        exclude module:"ognl"
+    compile("org.springframework.boot:spring-boot-starter-web") {
+        exclude module: "groovy"
+        exclude module: "spring-boot-starter-tomcat"
+        exclude module: "javassist"
+        exclude module: "snakeyaml"
+        exclude module: "ognl"
+        exclude module: "websocket"
+        exclude module: "logback-classic"
+        exclude module: "log4j-over-slf4j"
     }
-
     compile "org.springframework.boot:spring-boot-starter-jetty"
 
     compile "org.springframework:spring-jdbc:$springVersion"
     compile "org.springframework:spring-tx:$springVersion"
     compile "org.springframework:spring-orm:$springVersion"
+    compile "org.springframework:spring-aspects:$springVersion"
+
+    compile "org.springframework.security:spring-security-core:$springSecurityVersion"
+    compile "org.springframework.security:spring-security-web:$springSecurityVersion"
+    compile "org.springframework.security:spring-security-config:$springSecurityVersion"
 
     compile "org.apache.logging.log4j:log4j-api:$log4j2Version"
     compile "org.apache.logging.log4j:log4j-core:$log4j2Version"
+
 
     compile "com.fasterxml.jackson.core:jackson-databind"
     compile "joda-time:joda-time"
@@ -61,5 +67,5 @@ dependencies {
 
 jar {
     baseName = "document-base"
-    version =  "1.1"
+    version = "1.2"
 }

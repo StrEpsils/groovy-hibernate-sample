@@ -2,18 +2,21 @@
 <Configuration>
     <Appenders>
         <File name="file" fileName="log.log">
-            <PatternLayout>
-                <Pattern>%d %p %c{1.} [%t] %m %ex%n</Pattern>
-            </PatternLayout>
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </File>
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
     </Appenders>
     <Loggers>
-        <Root level="trace">
-            <AppenderRef ref="file" level="DEBUG"/>
-            <AppenderRef ref="Console" level="DEBUG"/>
+        <Root level="INFO">
+            <AppenderRef ref="file"/>
+            <AppenderRef ref="Console"/>
         </Root>
+        <Logger name="ru.kononov.documentBase" level="DEBUG"/>
+        <!--запросы к базе-->
+        <!--<Logger name="org.hibernate.SQL" level="DEBUG"/>-->
+        <!--вывод результатов-->
+        <!--<Logger name="org.hibernate.type" level="TRACE"/>-->
     </Loggers>
 </Configuration>

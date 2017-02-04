@@ -11,12 +11,12 @@ class DocumentTypeDaoBean extends BaseEntityDaoBean<DocumentType> implements Doc
 
     @Override
     DocumentType findDocumentTypeByName(String name) {
-        return (DocumentType)currentSession().createQuery(" from DocumentType doc_type where doc_type.name = \'$name\'").singleResult
+        return (DocumentType)currentSession().createQuery(" from DocumentType doc_type where doc_type.name = '$name'").singleResult
     }
 
     @Override
     DocumentType findDocumentTypeByCode(String code) {
-        return (DocumentType)currentSession().createQuery(" from DocumentType doc_type where doc_type.code = \'$code\'").singleResult
+        return (DocumentType)currentSession().createQuery(" from DocumentType doc_type where doc_type.code = '$code'").singleResult
     }
 
     @Override

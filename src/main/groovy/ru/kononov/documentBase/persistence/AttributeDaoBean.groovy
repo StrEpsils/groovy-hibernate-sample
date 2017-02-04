@@ -12,12 +12,12 @@ class AttributeDaoBean extends BaseEntityDaoBean<Attribute> implements Attribute
     @Override
     List<Attribute> findAllAttributesByDocumentType(Long documentTypeId) {
         return (List<Attribute>)currentSession()
-                .createQuery("from Attribute attr inner join attr.documentTypeAttribute as doc_type_attribute where doc_type_attribute.id = \'$documentTypeId\'").list()
+                .createQuery("from Attribute attr inner join attr.documentTypeAttribute as doc_type_attribute where doc_type_attribute.id = $documentTypeId").list()
     }
 
     @Override
     List<Attribute> findAll(){
-        super.findAll(Attribute.class.name)
+        super.findAll Attribute.class.name
     }
 
     @Override

@@ -12,7 +12,7 @@ class AttributeValueDaoBean extends BaseEntityDaoBean<AttributeValue> implements
     @Override
     List<AttributeValue> findAttributeValuesByAttributeNameAndDocumentId(String attributeName, Long documentId){
         return (List<AttributeValue>)currentSession()
-                .createQuery("from AttributeValue val inner join val.document as doc inner join val.attribute as attr where doc.id = $documentId and attr.name = \'$attributeName\'").list()
+                .createQuery("from AttributeValue val inner join val.document as doc inner join val.attribute as attr where doc.id = $documentId and attr.name = '$attributeName'").list()
     }
 
     @Override

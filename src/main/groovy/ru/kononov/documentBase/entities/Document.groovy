@@ -36,7 +36,7 @@ class Document implements Serializable{
     List<AttributeValue> attributeValues
 
     String toString(){
-        return "DOCUMENT_ID = $id, NAME = $name, DOCUMENT_TYPE_NAME = $documentType.name"
+        return "DOCUMENT_ID = $id, NAME = $name, DOCUMEN T_TYPE_NAME = $documentType.name"
     }
 
 }

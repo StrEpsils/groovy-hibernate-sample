@@ -143,3 +143,13 @@ INSERT INTO ATTRIBUTE_VALUE (DOCUMENT_ID, VALUE, ATTRIBUTE_ID) VALUES (9, 'Ко�
 -- CALL ADD_ATTRIBUTE_VALUE_TO_DOCUMENT('nameFather', 'Иванов Иван Иванович', 'свидетельство о рождении1');
 -- CALL ADD_ATTRIBUTE_VALUE_TO_DOCUMENT('nameFather', 'Петров Пётр Петрович', 'свидетельство о рождении2');
 -- CALL ADD_ATTRIBUTE_VALUE_TO_DOCUMENT('nameFather', 'Чегевара', 'свидетельство о рождении3');
+
+INSERT INTO USER (USER_ID, NAME, PASSWORD) VALUES (1, 'user', 'user');
+INSERT INTO USER (USER_ID, NAME, PASSWORD) VALUES (2, 'huyuser', 'huyuser');
+
+INSERT INTO ROLE (ROLE_ID, NAME, DESCRIPTION) VALUES (1, 'user_role', 'role for user');
+INSERT INTO ROLE (ROLE_ID, NAME, DESCRIPTION) VALUES (2, 'huyuser_role', 'role for huyuser');
+
+INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (1, 1);
+INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (1, 2);
+INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (2, 2);

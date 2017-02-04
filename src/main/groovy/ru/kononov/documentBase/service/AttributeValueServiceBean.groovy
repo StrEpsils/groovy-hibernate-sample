@@ -18,46 +18,46 @@ class AttributeValueServiceBean implements AttributeValueService{
 
     @Override
     List<AttributeValue> findAttributeValuesByDocumentId(Long documentId) {
-        return attributeValueDao.findAttributeValuesByDocumentId(documentId)
+        attributeValueDao.findAttributeValuesByDocumentId documentId
     }
 
     @Override
     List<AttributeValue> findAttributeValuesByAttributeNameAndDocumentId(String attributeName, Long documentId) {
-        return attributeValueDao.findAttributeValuesByAttributeNameAndDocumentId(attributeName, documentId)
+        attributeValueDao.findAttributeValuesByAttributeNameAndDocumentId(attributeName, documentId)
     }
 
     @Override
     Long saveAttributeValue(AttributeValue attributeValue){
-        return attributeValueDao.save(attributeValue)
+        attributeValueDao.save attributeValue
     }
 
     @Override
     AttributeValue updateAttributeValue(AttributeValue attributeValue){
-        return attributeValueDao.update(attributeValue)
+        attributeValueDao.update attributeValue
     }
 
     @Override
-    AttributeValue addAttributeValue(String value, Document document, Attribute attribute){
+    Long addAttributeValue(String value, Document document, Attribute attribute){
         AttributeValue attributeValue = new AttributeValue()
-        attributeValue.setValue(value)
-        attributeValue.setAttribute(attribute)
-        attributeValue.setDocument(document)
-        return attributeValueDao.save(attributeValue)
+        attributeValue.setValue value
+        attributeValue.setAttribute attribute
+        attributeValue.setDocument document
+        attributeValueDao.save attributeValue
     }
 
     @Override
     void deleteAttributeValue(AttributeValue attributeValue) {
-        attributeValueDao.delete(attributeValue)
+        attributeValueDao.delete attributeValue
     }
 
     @Override
     void deleteAttributeValuesByDocument(Document document){
-        attributeValueDao.deleteAttributeValuesByDocument(document.id)
+        attributeValueDao.deleteAttributeValuesByDocument document.id
     }
 
     
     @Override
     void deleteAttributeValuesByDocument(Long documentId){
-        attributeValueDao.deleteAttributeValuesByDocument(documentId)
+        attributeValueDao.deleteAttributeValuesByDocument documentId
     }
 }

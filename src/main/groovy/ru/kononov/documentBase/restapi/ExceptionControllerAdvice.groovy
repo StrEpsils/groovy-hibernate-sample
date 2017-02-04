@@ -16,7 +16,7 @@ class ExceptionControllerAdvice {
 
     @ExceptionHandler(DocumentBaseException.class)
     public ResponseEntity<RestResponse> exceptionHandler(Exception ex) {
-        return new ResponseEntity<RestResponse>(new RestResponse(HttpStatus.PRECONDITION_FAILED, ex.message), HttpStatus.BAD_REQUEST)
+        return new ResponseEntity<RestResponse>(new RestResponse(HttpStatus.PRECONDITION_FAILED, ex.message), HttpStatus.PRECONDITION_FAILED)
     }
 
 }

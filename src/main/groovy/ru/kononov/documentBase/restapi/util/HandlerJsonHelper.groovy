@@ -17,12 +17,12 @@ class HandlerJsonHelper {
 
     public static documentBaseResponse = { def entity, String messageNotFound, FilterProvider filterProvider ->
         if (entity == null) {
-            LOGGER.info(messageNotFound)
+            LOGGER.info messageNotFound
             return new ResponseEntity<RestResponse>(new RestResponse(HttpStatus.NOT_FOUND, messageNotFound), HttpStatus.NOT_FOUND)
         } else {
-            ObjectMapper mapper = new ObjectMapper();
-            ObjectWriter writer = mapper.writer(filterProvider);
-            def responseToJson = writer.writeValueAsString(entity)
+            ObjectMapper mapper = new ObjectMapper()
+            ObjectWriter writer = mapper.writer filterProvider
+            String responseToJson = writer.writeValueAsString entity
             return new ResponseEntity(responseToJson, HttpStatus.OK)
         }
     }

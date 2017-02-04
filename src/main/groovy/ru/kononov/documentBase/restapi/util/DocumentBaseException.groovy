@@ -11,6 +11,7 @@ class DocumentBaseException extends Exception {
         super(errorMessage)
         this.errorMessage = errorMessage
     }
+
     DocumentBaseException() {
         super()
     }

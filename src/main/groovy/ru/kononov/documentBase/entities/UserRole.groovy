@@ -1,7 +1,5 @@
 package ru.kononov.documentBase.entities
 
-import com.fasterxml.jackson.annotation.JsonFilter
-
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -9,28 +7,23 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
-import javax.persistence.OneToOne
 import javax.persistence.Table
 
 /**
- * Created by admin on 15.10.2016.
+ * Created by admin on 15.01.2017.
  */
 @Entity
-@Table(name = "ATTRIBUTE_VALUE")
-@JsonFilter("AttributeValue")
-class AttributeValue implements Serializable{
+@Table(name = "USER_ROLE")
+class UserRole implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ATTRIBUTE_VALUE_ID")
+    @Column(name = "USER_ROLE_ID")
     Long id
-    @Column(name = "VALUE")
-    String value
     @ManyToOne
-    @JoinColumn(name = "ATTRIBUTE_ID")
-    Attribute attribute
+    @JoinColumn(name = "USER_ID")
+    User user
     @ManyToOne
-    @JoinColumn(name = "DOCUMENT_ID")
-    Document document
-
+    @JoinColumn(name = "ROLE_ID")
+    Role role
 }

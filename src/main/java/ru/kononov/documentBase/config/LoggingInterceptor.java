@@ -18,7 +18,7 @@ public class LoggingInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-        LOGGER.debug("PRE_HANDLE \ntype: {} \n{} parameters: {} \nhandler: {}", request.getMethod(), request.getRequestURL(), request.getParameterMap(), handler);
+        LOGGER.debug("PRE_HANDLE \ntype: {} \n{} \nparameters: {} \nhandler: {}", request.getMethod(), request.getRequestURL(), request.getParameterMap(), handler);
         return true;
     }
 

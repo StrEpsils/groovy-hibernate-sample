@@ -16,5 +16,8 @@ interface AttributeService {
     void dettachAttributeFromDocumentType(long attributeId, Long documentTypeId)
     List<Attribute> findAllAttributesByDocumentType(DocumentType documentType);
     List<Attribute> findAllAttributesByDocumentType(Long documentTypeId);
+    Attribute findAttributeById(Long attributeId)
+    void deleteAttribute(Attribute attribute)
+    void deleteAttribute(Long attributeId)
 
 }
