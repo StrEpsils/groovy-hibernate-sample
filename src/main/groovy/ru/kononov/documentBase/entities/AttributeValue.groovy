@@ -9,7 +9,6 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
-import javax.persistence.OneToOne
 import javax.persistence.Table
 
 /**
@@ -24,11 +23,14 @@ class AttributeValue implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ATTRIBUTE_VALUE_ID")
     Long id
+
     @Column(name = "VALUE")
     String value
+
     @ManyToOne
     @JoinColumn(name = "ATTRIBUTE_ID")
     Attribute attribute
+
     @ManyToOne
     @JoinColumn(name = "DOCUMENT_ID")
     Document document

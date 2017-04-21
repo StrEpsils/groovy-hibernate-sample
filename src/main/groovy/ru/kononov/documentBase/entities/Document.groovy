@@ -27,16 +27,19 @@ class Document implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DOCUMENT_ID")
     Long id
+
     @Column(name = "NAME")
     String name
+
     @ManyToOne
     @JoinColumn(name = "DOCUMENT_TYPE_ID")
     DocumentType documentType
+
     @OneToMany(mappedBy = "document", cascade=CascadeType.ALL, orphanRemoval=true, fetch = FetchType.LAZY)
     List<AttributeValue> attributeValues
 
     String toString(){
-        return "DOCUMENT_ID = $id, NAME = $name, DOCUMEN T_TYPE_NAME = $documentType.name"
+        return "DOCUMENT_ID = $id, NAME = $name, DOCUMENT_TYPE_NAME = $documentType.name"
     }
 
 }

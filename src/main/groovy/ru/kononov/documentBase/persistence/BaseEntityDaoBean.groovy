@@ -43,5 +43,5 @@ abstract class BaseEntityDaoBean<T extends Serializable> implements BaseEntityDa
         return (List<T>)currentSession().createQuery("from $entityClassName entity").list()
     }
 
-    abstract Class<T> getClassName();
+    abstract Class<T> getClassName()
 }

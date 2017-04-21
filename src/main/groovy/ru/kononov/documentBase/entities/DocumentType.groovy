@@ -27,15 +27,19 @@ class DocumentType implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DOCUMENT_TYPE_ID")
     Long id
+
     @Column(name = "NAME")
     String name
+
     @Column(name = "CODE")
     String code
+
     @ManyToMany
     @JoinTable(name = "DOCUMENT_TYPE_ATTRIBUTE",
             joinColumns = @JoinColumn(name = "DOCUMENT_TYPE_ID"),
             inverseJoinColumns = @JoinColumn(name = "ATTRIBUTE_ID"))
     List<Attribute> attributes
+
     @OneToMany(mappedBy = "documentType", cascade=CascadeType.ALL, orphanRemoval=true, fetch = FetchType.LAZY)
     List<Document> documents
 

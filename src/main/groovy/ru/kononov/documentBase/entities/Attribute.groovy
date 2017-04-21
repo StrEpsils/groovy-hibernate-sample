@@ -24,8 +24,10 @@ class Attribute implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ATTRIBUTE_ID")
     Long id
+
     @Column(name = "NAME")
     String name
+
     @ManyToMany
     @JoinTable(name = "DOCUMENT_TYPE_ATTRIBUTE",
             joinColumns = @JoinColumn(name = "ATTRIBUTE_ID"),

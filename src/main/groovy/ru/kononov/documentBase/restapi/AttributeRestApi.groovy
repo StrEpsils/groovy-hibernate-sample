@@ -14,14 +14,14 @@ import ru.kononov.documentBase.restapi.handlers.AttributeHandler
  */
 @RestController
 @RequestMapping("/attribute")
-class AttributeApi {
+class AttributeRestApi {
 
     @Autowired
     AttributeHandler attributeHandler
 
     @RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity create(@RequestBody String json){
-        return documentHandler.createDocument(json)
+        attributeHandler.createAttribute json
     }
 
 }

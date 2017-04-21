@@ -14,6 +14,7 @@ import ru.kononov.documentBase.service.AttributeService
 
 /**
  * Created by admin on 18.10.2016.
+ *
  */
 
 @Service("attributeHandler")
@@ -29,11 +30,11 @@ class AttributeHandlerBean implements AttributeHandler {
         try {
             ObjectMapper mapper = new ObjectMapper()
             Attribute attribute = mapper.readValue(json, Attribute.class)
-            attributeService.saveAttribute(attribute)
-            return new ResponseEntity<RestResponse>(new RestResponse(HttpStatus.CREATED, "Атрибут добавлен успешно, присвоен id = $attribute.id "), HttpStatus.CREATED)
+            attributeService.saveAttribute attribute
+            new ResponseEntity<RestResponse>(new RestResponse(HttpStatus.CREATED, "Атрибут добавлен успешно, присвоен id = $attribute.id "), HttpStatus.CREATED)
         } catch (Exception e) {
-            LOGGER.error(e.localizedMessage)
-            return HandlerJsonHelper.badResponse(e)
+            LOGGER.error e.localizedMessage
+            HandlerJsonHelper.badResponse e
         }
     }
 
@@ -43,22 +44,29 @@ class AttributeHandlerBean implements AttributeHandler {
             ObjectMapper mapper = new ObjectMapper()
             Attribute attribute = mapper.readValue(json, Attribute.class)
             attributeService.updateAttribute(attribute)
-            return new ResponseEntity<RestResponse>(new RestResponse(HttpStatus.CREATED, "Атрибут с id = $attribute.id обновлён успешно"), HttpStatus.CREATED)
+            new ResponseEntity<RestResponse>(new RestResponse(HttpStatus.CREATED, "Атрибут с id = $attribute.id обновлён успешно"), HttpStatus.CREATED)
         } catch (Exception e) {
-            LOGGER.error(e.localizedMessage)
-            return HandlerJsonHelper.badResponse(e)
+            LOGGER.error e.localizedMessage
+            HandlerJsonHelper.badResponse e
         }
     }
 
     @Override
     ResponseEntity deleteAttribute(String attributeId) {
-        if (attributeId == null)
+        if (!attributeId)
             throw new DocumentBaseException("Параметр attributeId является обязательным")
         Long attributeIdLong
-        attributeIdLong = Long.parseLong(attributeId)
-        Attribute attribute = attributeService.findAttributeById(attributeIdLong)
-        attributeService.
-        return null
+        try {
+            attributeIdLong = Long.parseLong attributeId
+            Attribute attribute = attributeService.findAttributeById attributeIdLong
+            attributeService.deleteAttribute attribute
+            new ResponseEntity<RestResponse>(new RestResponse(HttpStatus.OK, "Атрибут с id = $attributeId удалён успешно"), HttpStatus.OK)
+        } catch (Exception e) {
+            LOGGER.error e.localizedMessage
+            HandlerJsonHelper.badResponse e
+        }
+
+
     }
 
     @Override

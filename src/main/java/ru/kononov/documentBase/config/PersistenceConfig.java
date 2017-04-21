@@ -21,10 +21,8 @@ import java.util.Properties;
 
 @Configuration
 @EnableAutoConfiguration(exclude = HibernateJpaAutoConfiguration.class)
-public class PersistanceConfig {
+public class PersistenceConfig {
 
-    @Value("${spring.jpa.properties.hibernate.show_sql}")
-    private boolean hibernateShowSql;
     @Value("${spring.jpa.properties.hibernate.format_sql}")
     private boolean hibernateFormatSql;
     @Value("${spring.jpa.properties.hibernate.enable_lazy_load_no_trans}")
@@ -50,7 +48,6 @@ public class PersistanceConfig {
         sessionFactory.setDataSource(dataSource);
         sessionFactory.setPackagesToScan("ru.kononov.documentBase.entities");
         Properties properties = new Properties();
-        properties.put("hibernate.show_sql", hibernateShowSql);
         properties.put("hibernate.format_sql", hibernateFormatSql);
         properties.put("hibernate.enable_lazy_load_no_trans", hibernateEnableLazyLoadNoTrans);
         properties.put("hibernate.max_fetch_depth", hibernateMaxFetchDepth);
